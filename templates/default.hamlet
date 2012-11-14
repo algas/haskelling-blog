@@ -1,0 +1,49 @@
+$doctype 5
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <meta name=viewport content="width=device-width, initial-scale=1.0" />
+    <title>#{title}
+    <link rel=stylesheet href=/css/bootstrap.min.css />
+    <link rel=stylesheet href=/css/bootstrap-responsive.min.css />
+    <link rel=stylesheet href=/css/syntax.css />
+  <body>
+    <div class="navbar nabvar-fixed-top">
+      <div class=navbar-inner>
+        <div class=container-fluid>
+          <div class=row-fluid>
+            <div class=span4>
+              <a class=brand href=/>はすけりんぐ！
+            <div class="span4 offset4">
+              <ul class=nav>
+                <li>
+                  <a href=/>Home
+                <li>
+                  <a href=/posts.html>Posts
+                <li>
+                  <a href=/link>Link
+                <li>
+                  <a href=/about>About
+    <div class=container-fluid>
+      <div class=row-fluid>
+        <div class=span9>
+          #{body}
+          <p>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="algas" data-lang="ja">ツイート
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+        <div class=span3>
+          <h3>ブクログ
+          <script type="text/javascript" src="http://widget.booklog.jp/blogparts/js/booklog_minishelf.js?default" id="booklog_minishelf">
+          <script type="text/javascript" src="http://api.booklog.jp/json/algas?category=0&count=15&callback=booklog_minishelf">
+          <h3>twitter
+          <a class="twitter-timeline" href="https://twitter.com/algas" data-widget-id="265006276424122368">@algas からのツイート
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    <footer>
+      <p>Powered by 
+        <a href="http://jaspervdj.be/hakyll/">Hakyll 
+        and 
+        <a href="http://twitter.github.com/bootstrap/">Bootstrap
+        .
+      <p>&copy; Masahiro Yamauchi
+    <script src=js/jquery.min.js>
+    <script src=js/bootstrap.min.js>
