@@ -16,7 +16,7 @@ main = hakyllWith config $ do
         route   idRoute
         compile compressCssCompiler
 
-    match "posts/*" $ do
+    match "posts/*.md" $ do
         route $ setExtension "html"
         compile $ pageCompiler
             >>> arr (renderDateField "date" "%Y/%m/%d" "Date unknown")
@@ -48,7 +48,7 @@ main = hakyllWith config $ do
     create "tags" $
         requireAll "posts/*" (\_ ps -> readTags ps :: Tags String)
 
-    match "tags/*" $ route $ setExtension ".html"
+    match "tags/*" $ route $ setExtension "html"
     metaCompile $ require_ "tags"
         >>> arr tagsMap
         >>> arr (map (\(t, p) -> (tagIdentifier t, makeTagList t p)))
@@ -74,4 +74,6 @@ makeTagList tag posts =
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration { deployCommand = deploy }
-    where deploy = "cp -r _site/* /var/www/blog/ && runhaskell hakyll.hs clean"
+    where
+        deploy = "cp -r _site/*.html _site/posts _site/tags ./ && runhaskell hakyll.hs clean"
+        -- deploy = "cp -r _site/* /var/www/blog/ && runhaskell hakyll.hs clean"
