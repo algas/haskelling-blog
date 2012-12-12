@@ -1,0 +1,2 @@
+#!/bin/bash
+runhaskell hakyll.hs build && runhaskell hakyll.hs deploy

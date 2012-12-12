@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<title>Haskell だけどモナドがあれば IO してもいいよね</title>
+<link rel="stylesheet" href="../css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="../css/bootstrap-responsive.min.css"></link>
+<link rel="stylesheet" href="../css/syntax.css"></link>
+</head>
+<body><div class="navbar nabvar-fixed-top"><div class="navbar-inner"><div class="container-fluid"><div class="row-fluid"><div class="span4"><a class="brand" href="../">はすけりんぐ！</a>
+</div>
+<div class="span4 offset4"><ul class="nav"><li><a href="../">Home</a>
+</li>
+<li><a href="../posts.html">Posts</a>
+</li>
+<li><a href="../link">Link</a>
+</li>
+<li><a href="../about">About</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container-fluid"><div class="row-fluid"><div class="span9"><p><h2 id="haskell-だけどモナドがあれば-io-してもいいよね">Haskell だけどモナドがあれば IO してもいいよね</h2>
+<p>Haskell で IO を扱います。逐次的に書けます。</p>
+<h3 id="こんせか">こんせか</h3>
+<pre>
+main = putStrLn &quot;Hello World!&quot;
+</pre>
+
+ここで型は以下のように定義されています。
+<pre>
+putStrLn :: String -&gt; IO ()
+</pre>
+
+<h3 id="えうれか">えうれか</h3>
+do の中では逐次的（上から順番）に処理がなされます。 do の中に書ける関数の型は do を書いた位置のもの（モナド）と同じである必要があります。<br />main は IO a のような型を返す決まりになっているので、以下の do 以下の式でも IO a の型を持つ必要があります。
+<pre>
+main = do
+    somethingDo
+    anythingDo
+</pre>
+一番シンプルな例
+<pre>
+main = do
+    return ()
+</pre>
+この文脈で return を使うと do は　IO にかかっているので、 return () で IO () を返します。 上記の関数は実際には何もしません。
+<pre>
+main = do
+    getLine
+</pre>
+getLine :: IO String なので、この do の中に書くことができます。<br />getLine は標準入力を受け付ける関数です。 main 実行後に Enter を押すまでキー入力を受け付けます。<br />せっかくなので入力した文字を出力してみましょう。
+<pre>
+main = do
+    line &lt;- getLine
+    putStrLn line
+</pre>
+<p>line &lt;- getLine では getLine を line に束縛しています。 ここで line :: String になっています。<br />getLine :: IO String から IO を外したものが束縛された line の型になります。<br />line :: String なので、putStrLn :: String -&gt; IO () の引数として渡すことができます。</p>
+<p>今回は標準入出力を扱うだけのものすごく単純な例を丁寧に解説しました。<br />正しく基本を理解して拡張していけば、ファイルを読み書きするコードやもっと複雑なコードも理解できるようになるはずです。</p></p>
+<p>tags: <a href="../tags/haskell.html">haskell</a>, <a href="../tags/io.html">io</a></p>
+
+<p><a class="twitter-share-button" href="https://twitter.com/share" data-via="algas" data-lang="ja">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</p>
+</div>
+<div class="span3"><h3>ブクログ</h3>
+<script type="text/javascript" src="http://widget.booklog.jp/blogparts/js/booklog_minishelf.js?default" id="booklog_minishelf"></script>
+<script type="text/javascript" src="http://api.booklog.jp/json/algas?category=0&amp;count=15&amp;callback=booklog_minishelf"></script>
+<h3>twitter</h3>
+<a class="twitter-timeline" href="https://twitter.com/algas" data-widget-id="265006276424122368">@algas からのツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+</div>
+</div>
+<footer><p>Powered by <a href="http://jaspervdj.be/hakyll/">Hakyll </a>
+and 
+<a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
+.</p>
+<p>© Masahiro Yamauchi</p>
+</footer>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
