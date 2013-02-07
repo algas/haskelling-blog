@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<title>Number Place Solver</title>
+<link rel="stylesheet" href="../css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="../css/bootstrap-responsive.min.css"></link>
+<link rel="stylesheet" href="../css/syntax.css"></link>
+</head>
+<body><div class="navbar nabvar-fixed-top"><div class="navbar-inner"><div class="container-fluid"><div class="row-fluid"><div class="span4"><a class="brand" href="../">はすけりんぐ！</a>
+</div>
+<div class="span4 offset4"><ul class="nav"><li><a href="../">Home</a>
+</li>
+<li><a href="../posts.html">Posts</a>
+</li>
+<li><a href="../link">Link</a>
+</li>
+<li><a href="../about">About</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container-fluid"><div class="row-fluid"><div class="span9"><p><h2 id="numberplace-を解いてみた">NumberPlace を解いてみた</h2>
+<p>数独やナンバープレイスと呼ばれるパズルをHaskellで解くコードを書いてみました。 総当りではなく人間が解いていくやり方でマスを埋めていきます。 難しい問題は解けないかもしれません。 ゲームのルールの知っているものとして説明を省きます。</p>
+<h3 id="基本方針">基本方針</h3>
+<ol style="list-style-type: decimal">
+<li>初期状態のデータを入力する</li>
+<li>全部のマスが埋まっているかどうかをチェックする（埋まってたら終了）</li>
+<li>縦、横、ブロックを調べて入力可能なマスを1から9までについて探す</li>
+<li>もし入力可能なマスがあったら埋める</li>
+<li>手順2に戻って繰り返す</li>
+</ol>
+<h3 id="データ構造">データ構造</h3>
+<ul>
+<li>各マスには[1-9]の数値(Int)を入れます。何も入っていないマスには0を入れます。</li>
+<li>マスはData.Arrayを使って表現することにします。</li>
+</ul>
+<p>上記の条件を踏まえて、骨格を実装していきます。 データ型とデータを作成するための関数を定義します。 Data.Array を使って 9x9 の Int 型の array を作成しようと思います。</p>
+今回使用する Data.Array の関数を紹介します。
+<pre>
+listArray :: Ix i =&gt; (i,i) -&gt; [e] -&gt; Array i e | リストから array を作成する
+(!) :: Ix i =&gt; Array i e -&gt; i -&gt; e | インデックスで指定した値を取得する
+indices :: Ix i =&gt; Array i e -&gt; [i] | インデックスのリストを取得する
+elems :: Ix i =&gt; Array i e -&gt; [e] | 値のリストを取得する
+assocs :: Ix i =&gt; Array i e -&gt; [(i,e)] | インデックスと値のリストを取得する
+(//) :: Ix i =&gt; Array i e -&gt; [(i,e)] -&gt; Array i e | array を更新する
+</pre>
+詳しくは Data.List のリファレンスを参照してください。
+<pre>
+import Data.List
+import Data.Array
+import Control.Applicative
+
+type Index = (Int,Int)
+type Board = Array Index Int
+
+boardBounds :: (Index,Index)
+boardBounds = ((1,1),(9,9))
+
+createBoard :: [[Int]] -&gt; Board
+createBoard = listArray boardBounds . concat
+</pre>
+createBoard に 9x9 の2次元リストを渡すと Int 型の Data.Array を生成します。 listArray に境界インデックスとデータ（リスト）を渡すとN次元のArrayが作れます。 縦、横、ブロックのそれぞれにおいて要素を見る必要があるので、indices と elems をそれらについて作成します。
+<pre>
+horizontalIndices :: Index -&gt; [Index]
+horizontalIndices (i,_) = [(i,j) | j &lt;- [1..9]]
+
+verticalIndices :: Index -&gt; [Index]
+verticalIndices (_,i) = [(j,i) | j &lt;- [1..9]]
+
+blockIndices :: Index -&gt; [Index]
+blockIndices (i,j) = [(f i + x, f j + y) | x &lt;- [1..3], y &lt;- [1..3]]
+    where f n = 3 * ((n - 1) `div` 3)
+
+horizontalElems :: Board -&gt; [[Int]]
+horizontalElems = splits 9 . elems
+
+verticalElems :: Board -&gt; [[Int]]
+verticalElems = transpose . horizontalElems
+
+blockElems :: Board -&gt; [[Int]]
+blockElems b = concat [ sp xss | xss &lt;- (splits 27 . elems) b]
+    where
+        sp :: [Int] -&gt; [[Int]]
+        sp xss = map concat $ transpose [splitAt3 (3,6) xs | xs &lt;- splits 9 xss]
+</pre>
+ここで上記の関数を定義するために以下の補助関数を作成しました。
+<pre>
+isFinished :: Board -&gt; Bool
+isFinished b = all check (horizontalElems b ++ verticalElems b ++ blockElems b)
+    where
+        check :: [[Int]] -&gt; Bool
+        check xs = all (==[1..9]) $ map sort xs
+
+solve :: Board -&gt; Board
+solve b
+    | isFinished b = b
+    | s == b = b
+    | otherwise = solve s
+    where
+        s = solveStep b
+</pre>
+<p>solve では isFinished が True もしくは solveStep b == b すなわち、それ以上解けない場合にループを抜けるように定義しています。 isFinished は縦、横、ブロックの全要素を見て [1-9] を含んでいたら True を返すという数独の定義そのものになっています。</p>
+<p>長くなったので solveStep の説明以降は次回にすることにします。</p></p>
+<p>tags: <a href="../tags/haskell.html">haskell</a>, <a href="../tags/game.html">game</a></p>
+
+<p><a class="twitter-share-button" href="https://twitter.com/share" data-via="algas" data-lang="ja">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</p>
+</div>
+<div class="span3"><h3>ブクログ</h3>
+<script type="text/javascript" src="http://widget.booklog.jp/blogparts/js/booklog_minishelf.js?default" id="booklog_minishelf"></script>
+<script type="text/javascript" src="http://api.booklog.jp/json/algas?category=0&amp;count=15&amp;callback=booklog_minishelf"></script>
+<h3>twitter</h3>
+<a class="twitter-timeline" href="https://twitter.com/algas" data-widget-id="265006276424122368">@algas からのツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+</div>
+</div>
+<footer><p>Powered by <a href="http://jaspervdj.be/hakyll/">Hakyll </a>
+and 
+<a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
+.</p>
+<p>© Masahiro Yamauchi</p>
+</footer>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
