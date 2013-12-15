@@ -1,28 +1,49 @@
-<!DOCTYPE html>
-<html><head><meta charset="utf-8"></meta>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-<title>ghci を使う</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css"></link>
-<link rel="stylesheet" href="../css/bootstrap-responsive.min.css"></link>
-<link rel="stylesheet" href="../css/syntax.css"></link>
-</head>
-<body><div class="navbar nabvar-fixed-top"><div class="navbar-inner"><div class="container-fluid"><div class="row-fluid"><div class="span4"><a class="brand" href="../">はすけりんぐ！</a>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ghci を使う</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="../css/syntax.css" />
+  </head>
+  <body>
+    <div class="navbar nabvar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span4">
+              <a class="brand" href="../">はすけりんぐ！</a>
+            </div>
+            <div class="span4 offset4">
+              <ul class="nav">
+                <li>
+                  <a href="../">Home</a>
+                </li>
+                <li>
+                  <a href="../about.html">About</a>
+                </li>
+                <li>
+                  <a href="../link.html">Link</a>
+                </li>
+                <li>
+                  <a href="../posts.html">Posts</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span9">
+          <div class="info">
+    Posted on 2012-12-05
+    
 </div>
-<div class="span4 offset4"><ul class="nav"><li><a href="../">Home</a>
-</li>
-<li><a href="../posts.html">Posts</a>
-</li>
-<li><a href="../link">Link</a>
-</li>
-<li><a href="../about">About</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="container-fluid"><div class="row-fluid"><div class="span9"><p><h2 id="ghci-を使う">ghci を使う</h2>
+
+<h2 id="ghci-を使う">ghci を使う</h2>
 <p>ここでは ghci の2種類の使い方について説明します。私が使い方を知らなくて困ったことのみを中心に書き、細かいことは他の書籍やWebサイトに任せます。</p>
 <h3 id="hs-ファイルを呼び出す">hs ファイルを呼び出す</h3>
 Hoge.hs というファイル名で以下の2行を保存しましょう。
@@ -63,29 +84,33 @@ Prelude&gt; let add x y = x + y
 Prelude&gt; add 2 3
 5
 </pre>
-<p>ここで書いた以外にも便利なコマンドや機能がたくさんあります。<br /><a href="http://www.haskell.org/ghc/docs/latest/html/users_guide/ghci.html">http://www.haskell.org/ghc/docs/latest/html/users_guide/ghci.html</a></p></p>
-<p>tags: <a href="../tags/haskell.html">haskell</a>, <a href="../tags/ghci.html">ghci</a></p>
+<p>ここで書いた以外にも便利なコマンドや機能がたくさんあります。<br /><a href="http://www.haskell.org/ghc/docs/latest/html/users_guide/ghci.html">http://www.haskell.org/ghc/docs/latest/html/users_guide/ghci.html</a></p>
 
-<p><a class="twitter-share-button" href="https://twitter.com/share" data-via="algas" data-lang="ja">ツイート</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</p>
-</div>
-<div class="span3"><h3>ブクログ</h3>
-<script type="text/javascript" src="http://widget.booklog.jp/blogparts/js/booklog_minishelf.js?default" id="booklog_minishelf"></script>
-<script type="text/javascript" src="http://api.booklog.jp/json/algas?category=0&amp;count=15&amp;callback=booklog_minishelf"></script>
-<h3>twitter</h3>
-<a class="twitter-timeline" href="https://twitter.com/algas" data-widget-id="265006276424122368">@algas からのツイート</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</div>
-</div>
-</div>
-<footer><p>Powered by <a href="http://jaspervdj.be/hakyll/">Hakyll </a>
-and 
-<a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
-.</p>
-<p>© Masahiro Yamauchi</p>
-</footer>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</body>
+          <p>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="algas" data-lang="ja">ツイート</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </p>
+        </div>
+        <div class="span3">
+          <h3>ブクログ</h3>
+          <script type="text/javascript" src="http://widget.booklog.jp/blogparts/js/booklog_minishelf.js?default" id="booklog_minishelf"></script>
+          <script type="text/javascript" src="http://api.booklog.jp/json/algas?category=0&amp;count=15&amp;callback=booklog_minishelf"></script>
+          <h3>twitter</h3>
+          <a class="twitter-timeline" href="https://twitter.com/algas" data-widget-id="265006276424122368">@algas からのツイート</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>Powered by 
+        <a href="http://jaspervdj.be/hakyll/">Hakyll</a>
+        and 
+        <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
+        .
+      </p>
+      <p>© Masahiro Yamauchi</p>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>

@@ -1,28 +1,49 @@
-<!DOCTYPE html>
-<html><head><meta charset="utf-8"></meta>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-<title>Install GHC and cabal-install in Ubuntu 13.04</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css"></link>
-<link rel="stylesheet" href="../css/bootstrap-responsive.min.css"></link>
-<link rel="stylesheet" href="../css/syntax.css"></link>
-</head>
-<body><div class="navbar nabvar-fixed-top"><div class="navbar-inner"><div class="container-fluid"><div class="row-fluid"><div class="span4"><a class="brand" href="../">はすけりんぐ！</a>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Install GHC and cabal-install in Ubuntu 13.04</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="../css/syntax.css" />
+  </head>
+  <body>
+    <div class="navbar nabvar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span4">
+              <a class="brand" href="../">はすけりんぐ！</a>
+            </div>
+            <div class="span4 offset4">
+              <ul class="nav">
+                <li>
+                  <a href="../">Home</a>
+                </li>
+                <li>
+                  <a href="../about.html">About</a>
+                </li>
+                <li>
+                  <a href="../link.html">Link</a>
+                </li>
+                <li>
+                  <a href="../posts.html">Posts</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span9">
+          <div class="info">
+    Posted on 2013-05-06
+    
 </div>
-<div class="span4 offset4"><ul class="nav"><li><a href="../">Home</a>
-</li>
-<li><a href="../posts.html">Posts</a>
-</li>
-<li><a href="../link">Link</a>
-</li>
-<li><a href="../about">About</a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="container-fluid"><div class="row-fluid"><div class="span9"><p><h2 id="haskell-の実行環境の構築-in-ubuntu-13.04-raring">Haskell の実行環境の構築 in Ubuntu 13.04 (raring)</h2>
+
+<h2 id="haskell-の実行環境の構築-in-ubuntu-13.04-raring">Haskell の実行環境の構築 in Ubuntu 13.04 (raring)</h2>
 <p>Ubuntu 13.04 (raring) で Haskell (GHC) の実行環境を構築してみました。 多くの環境においては haskell-platform をインストールするのが、haskell の実行環境を作るのに最も簡単な方法です。 しかし、raring には haskell-platform パッケージが本記事の執筆時点(2013/05/06)にはリリースされていません。</p>
 <h3 id="osパッケージを使う">OSパッケージを使う</h3>
 <pre>
@@ -67,29 +88,33 @@ export PATH=$HOME/.cabal/bin:$PATH
 </pre>
 </li>
 </ol>
-<p>以上でインストールの手順は完了です。</p></p>
-<p>tags: <a href="../tags/haskell.html">haskell</a>, <a href="../tags/ghc.html">ghc</a>, <a href="../tags/cabal.html">cabal</a>, <a href="../tags/ubuntu.html">ubuntu</a></p>
+<p>以上でインストールの手順は完了です。</p>
 
-<p><a class="twitter-share-button" href="https://twitter.com/share" data-via="algas" data-lang="ja">ツイート</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</p>
-</div>
-<div class="span3"><h3>ブクログ</h3>
-<script type="text/javascript" src="http://widget.booklog.jp/blogparts/js/booklog_minishelf.js?default" id="booklog_minishelf"></script>
-<script type="text/javascript" src="http://api.booklog.jp/json/algas?category=0&amp;count=15&amp;callback=booklog_minishelf"></script>
-<h3>twitter</h3>
-<a class="twitter-timeline" href="https://twitter.com/algas" data-widget-id="265006276424122368">@algas からのツイート</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</div>
-</div>
-</div>
-<footer><p>Powered by <a href="http://jaspervdj.be/hakyll/">Hakyll </a>
-and 
-<a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
-.</p>
-<p>© Masahiro Yamauchi</p>
-</footer>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</body>
+          <p>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="algas" data-lang="ja">ツイート</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </p>
+        </div>
+        <div class="span3">
+          <h3>ブクログ</h3>
+          <script type="text/javascript" src="http://widget.booklog.jp/blogparts/js/booklog_minishelf.js?default" id="booklog_minishelf"></script>
+          <script type="text/javascript" src="http://api.booklog.jp/json/algas?category=0&amp;count=15&amp;callback=booklog_minishelf"></script>
+          <h3>twitter</h3>
+          <a class="twitter-timeline" href="https://twitter.com/algas" data-widget-id="265006276424122368">@algas からのツイート</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>Powered by 
+        <a href="http://jaspervdj.be/hakyll/">Hakyll</a>
+        and 
+        <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
+        .
+      </p>
+      <p>© Masahiro Yamauchi</p>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>

@@ -1,4 +1,0 @@
-<li>
-  <a href=#{url}>#{title}
-  : 
-  <span class=soft>#{date}

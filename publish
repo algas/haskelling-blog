@@ -1,2 +1,3 @@
 #!/bin/bash
-runhaskell hakyll.hs build && runhaskell hakyll.hs deploy
+cabal run clean && cabal run build && cp _site/*.html ./ && cp _site/posts/*.html ./posts/
+cabal run clean
