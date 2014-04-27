@@ -1,4 +1,4 @@
 #!/bin/bash
 cp .rsyncignore _site/ && cabal run build && git checkout gh-pages && rsync -av --delete --exclude-from=.rsyncignore _site/ ./ && git add --all && git commit -m 'Update site' && git push origin gh-pages
-cabal run clean
 git checkout master
+cabal run clean
