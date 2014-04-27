@@ -1,0 +1,111 @@
+<!doctype html>
+<html>    
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Haskell を動かす</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="navbar nabvar-fixed-top navbar-default">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="../">はすけりんぐ！</a>
+            </div>
+          </div>
+          <div class="col-md-4 col-md-offset-4">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="../">Home</a>
+              </li>
+              <li>
+                <a href="../about.html">About</a>
+              </li>
+              <li>
+                <a href="../links.html">Links</a>
+              </li>
+              <li>
+                <a href="../posts.html">Posts</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="info">
+    Posted on November 22, 2012
+    
+</div>
+
+<h2 id="haskell-を動かす">Haskell を動かす</h2>
+<p>「Haskell のプログラムを書いてみたんだけど、どうやったら動かせるの？」に答えます。</p>
+<h3 id="インストール">インストール</h3>
+<p><a href="http://www.haskell.org/platform/">Haskell Platform</a> をインストールしましょう。</p>
+<p>インストールの詳細については公式ドキュメントや他の記事に任せます。</p>
+<h3 id="実行">実行</h3>
+<p>Haskell のコンパイラはいくつもありますが、もっとも多くの人が使っている ghc の場合を例に3種類の方法を紹介します。</p>
+<ol style="list-style-type: decimal">
+<li>ghci (interactive shell)</li>
+</ol>
+<p>1行毎にコンパイルして動作確認できます。hs ファイルやライブラリのモジュールを呼び出すこともできます。</p>
+<pre>
+$ ghci
+<code>&gt; putStrLn &quot;Hello World&quot;</code>
+<code>Hello World</code>
+</pre>
+
+<ol start="2" style="list-style-type: decimal">
+<li>runhaskell (interpreter)</li>
+</ol>
+<p>hs ファイルをコンパイルして main 関数を実行します。main が適切に書かれていないとエラーが出ます。</p>
+<pre>
+$ vi hoge.hs
+<code>main = print &quot;Hello World&quot;</code>
+$ runhaskell hoge.hs
+<code>Hello World</code>
+</pre>
+ 
+
+<ol start="3" style="list-style-type: decimal">
+<li>ghc (compiler)</li>
+</ol>
+<p>hs ファイルをコンパイルして実行ファイルまたはモジュールファイルを生成します。</p>
+<pre>
+$ ghc -o hoge hoge.hs
+$ ./hoge
+<code>Hello World</code>
+</pre>
+
+<p>同じコードであれば、後者の方がより高速に実行できます。</p>
+<p>私の場合、以下のように使い分けています。開発中は主に ghci で小さな関数単位で型チェックや動作確認を行い、runhaskell でプログラム全体の動作を確認します。ghc コマンドでビルドするのは本番系で運用する時、もしくは速度が必要とされる計算などを行うときだけです。</p>
+
+          <p>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="algas" data-lang="ja">ツイート</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </p>
+        </div>
+        <div class="col-md-3">
+          <h3>ブクログ</h3>
+          <script type="text/javascript" src="http://widget.booklog.jp/blogparts/js/booklog_minishelf.js?default" id="booklog_minishelf"></script>
+          <script type="text/javascript" src="http://api.booklog.jp/json/algas?category=0&amp;count=15&amp;callback=booklog_minishelf"></script>
+          <h3>twitter</h3>
+          <a class="twitter-timeline" href="https://twitter.com/algas" data-widget-id="265006276424122368">@algas からのツイート</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>Powered by <a href="http://jaspervdj.be/hakyll/">Hakyll</a>
+      and <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
+      .</p>
+      <p>© Masahiro Yamauchi</p>
+    </footer>
+    <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  </body>
+</html>
