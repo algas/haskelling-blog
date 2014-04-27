@@ -1,3 +1,6 @@
+.rsyncignore
+.git
+.gitignore
 *.swp
 dist
 cabal-dev
