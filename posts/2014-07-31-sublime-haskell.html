@@ -1,0 +1,182 @@
+<!doctype html>
+<html>    
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setup Sublime Text as Haskell IDE</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="navbar nabvar-fixed-top navbar-default">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="../">はすけりんぐ！</a>
+            </div>
+          </div>
+          <div class="col-md-4 col-md-offset-4">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="../">Home</a>
+              </li>
+              <li>
+                <a href="../about.html">About</a>
+              </li>
+              <li>
+                <a href="../links.html">Links</a>
+              </li>
+              <li>
+                <a href="../posts.html">Posts</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="info">
+    Posted on July 31, 2014
+    
+</div>
+
+<h2 id="sublime-text-を-ide-として-ghc-7.8-のコードを書く">Sublime Text を IDE として GHC 7.8 のコードを書く</h2>
+<p>Sublime Text というテキストエディタを使って GHC 7.8 系のコードを書くための手順をまとめました。<br />cabal sandbox を使って開発ができます。</p>
+<h3 id="setup-haskell">Setup Haskell</h3>
+<p>ghc 7.8.3 (執筆時点での最新) と cabal-install (1.20.0.3) をインストールします。<br />執筆時点では対応している Haskell-Platform の安定版はリリースされていません。<br />拙作のインストーラ haskell-playbook (ansible) などを使ってインストールしましょう。<br /><a href="https://github.com/algas/haskell-playbook">https://github.com/algas/haskell-playbook</a><br />もしこの記事を読んでいる時点で Haskell-Platform (2014.2?) が出ていればそちらを使ってください。</p>
+<h3 id="setup-ide">Setup IDE</h3>
+<p>Sublime Text (以下、ST) と関連プラグイン(SublimeHaskell, SublimeREPL)をセットアップします。</p>
+<h4 id="install-sublime-text">Install Sublime Text</h4>
+<p>ST3 とパッケージ管理ツール(Package Control)をインストールします。</p>
+<ol style="list-style-type: decimal">
+<li>ST3 をインストールする<br />(ST2 の場合にはファイルパスなどが異なる場合があります)</li>
+<li>ST3 に Package Control をインストールする</li>
+</ol>
+<h4 id="install-sublimehaskell-plugin">Install SublimeHaskell Plugin</h4>
+<p>SublimeHaskell をインストールします。<br /><a href="https://github.com/SublimeHaskell/SublimeHaskell">https://github.com/SublimeHaskell/SublimeHaskell</a><br />名前の補完やファイル保存時の自動ビルドができるようになります。</p>
+<ol style="list-style-type: decimal">
+<li>cabal パッケージリストの更新と cabal の更新<br />cabal update &amp;&amp; cabal install cabal-install</li>
+<li>基本依存ライブラリのインストール<br />cabal install aeson haskell-src-exts haddock もし haddock のインストールに失敗したら以下を試そう cabal install haddock –constraint=haddock==2.13.2.1</li>
+<li>追加依存ライブラリのインストール(オプション)<br />cabal install ghc-mod stylish-haskell haskell-docs hdevtools (cabal sandbox を使うので cabal-dev は使いません)</li>
+<li>SublimeHaskell のインストール<br /></li>
+<li>ST3 の再起動</li>
+</ol>
+<h4 id="install-sublimerepl-plugin">Install SublimeREPL Plugin</h4>
+<p>SublimeREPL をインストールします。<br /><a href="https://github.com/wuub/SublimeREPL">https://github.com/wuub/SublimeREPL</a><br />SublimeText 上で repl (インタラクティブシェル) が使えるようになります。</p>
+<ol style="list-style-type: decimal">
+<li>SublimeREPL のインストール<br /></li>
+<li>パッケージ内の以下のファイルを変更する<br />Linux: <span class="math"><em>H</em><em>O</em><em>M</em><em>E</em>/.<em>c</em><em>o</em><em>n</em><em>f</em><em>i</em><em>g</em>/<em>s</em><em>u</em><em>b</em><em>l</em><em>i</em><em>m</em><em>e</em> − <em>t</em><em>e</em><em>x</em><em>t</em> − 3/<em>P</em><em>a</em><em>c</em><em>k</em><em>a</em><em>g</em><em>e</em><em>s</em>/<em>S</em><em>u</em><em>b</em><em>l</em><em>i</em><em>m</em><em>e</em><em>R</em><em>E</em><em>P</em><em>L</em>/<em>c</em><em>o</em><em>n</em><em>f</em><em>i</em><em>g</em>/<em>H</em><em>a</em><em>s</em><em>k</em><em>e</em><em>l</em><em>l</em>/<em>M</em><em>a</em><em>i</em><em>n</em>.<em>s</em><em>u</em><em>b</em><em>l</em><em>i</em><em>m</em><em>e</em> − <em>m</em><em>e</em><em>n</em><em>u</em><em>M</em><em>a</em><em>c</em> : </span>HOME/Library/Application Support/Sublime Text 3/Packages/SublimeREPL/config/Haskell/Main.sublime-menu
+<ul>
+<li>before:
+<pre>
+&quot;cmd&quot;: [&quot;ghci&quot;],
+</pre></li>
+<li>after:
+<pre>
+&quot;cmd&quot;: [&quot;cabal&quot;, &quot;repl&quot;],
+</pre></li>
+</ul></li>
+<li>ST3 の再起動</li>
+</ol>
+<h3 id="development">Development</h3>
+<p>以下の proj にはプロジェクトの名前を適切につけてください。</p>
+<h4 id="setup-your-cabal">Setup Your Cabal</h4>
+<p>Cabal (Haskell のパッケージ) を設定します。 ターミナルから以下を実行します。</p>
+<ol style="list-style-type: decimal">
+<li>ディレクトリの作成<br />mkdir proj &amp;&amp; cd proj</li>
+<li>パッケージリストの更新<br />cabal update</li>
+<li>sandbox の作成<br />cabal sandbox init &amp;&amp; cabal update</li>
+<li>Cabal の初期設定<br />cabal init</li>
+<li>cabal ファイルの編集<br />Edit proj.cabal<br />main-is のコメントを外す(コメントイン)</li>
+<li>main ファイルの作成<br />Edit main.hs
+<pre>
+module Main where
+main :: IO ()
+main = print &quot;Hello world!&quot;
+</pre></li>
+<li>実行<br />cabal run</li>
+</ol>
+<h4 id="setup-your-sublime-project">Setup Your Sublime Project</h4>
+<p>Sublime Text 上で以下の設定を行います。</p>
+<ol style="list-style-type: decimal">
+<li>File &gt; “Open Folder…” &gt; proj</li>
+<li>Project &gt; “Save Project As…” &gt; proj.sublime-project</li>
+</ol>
+<h4 id="usage-sublimerepl">Usage SublimeREPL</h4>
+<p>SublimeREPL の使い方というか起動方法は以下の通りです。</p>
+<ol style="list-style-type: decimal">
+<li>Tools &gt; SublimeREPL &gt; Haskell</li>
+<li>開いたウィンドウの中でコマンドを実行できます。<br />
+<pre>
+<interactive> :main
+</pre>
+</li>
+</ol>
+<p>repl (ghci) の使い方は他の記事や書籍などを参考にしてください。</p>
+<h4 id="work-flow">Work Flow</h4>
+<p>私は以下のような流れで開発を進めています。</p>
+<ol style="list-style-type: decimal">
+<li>コードを書く</li>
+<li>依存関係のエラーが出る</li>
+<li>.cabal に依存ライブラリを追加する</li>
+<li>cabal install –only-dependencies</li>
+<li>エラー治った</li>
+<li>repl で動作を確認しながら開発を進める</li>
+<li>ひと通りできたら cabal run で main の動作を確認する</li>
+<li>最初に戻る</li>
+</ol>
+<h4 id="commands">Commands</h4>
+<ul>
+<li>依存ライブラリのインストール<br />cabal install –only-dependencies</li>
+<li>ビルド<br />cabal build</li>
+<li>インタープリタ<br />cabal run</li>
+<li>インタラクティブシェル<br />cabal repl</li>
+</ul>
+<h3 id="tips">Tips</h3>
+<ul>
+<li>Tab to spaces<br />タブをスペースに変換する設定をします。 設定する場所は影響範囲に応じて以下の2箇所から選択できます。
+<ul>
+<li>Haskell のみ<br />(Haskell ファイルを開いている状態で)<br />Preference &gt; “Settings - More” &gt; “Syntax Specific - User”<br /></li>
+<li>Sublime Text 全体<br />Preference &gt; “Settings - User”<br />
+<pre>
+{
+&quot;draw_white_space&quot;: &quot;all&quot;, // スペース記号を表示する
+&quot;tab_size&quot;: 4, // 1タブで4スペースになる
+&quot;translate_tabs_to_spaces&quot;: true, // タブをスペースに変更する
+}
+</pre></li>
+</ul></li>
+<li>画面分割<br />REPL の画面をソースコードと同時に表示できるように画面分割すると作業が捗ります。<br />View &gt; Layout &gt; Rows: 2<br />横長モニタでは Rows: 2 の代わりに Columns: 2 もオススメです。</li>
+</ul>
+<h3 id="todo">ToDo</h3>
+<ul>
+<li>SublimeREPL の修正を下位互換性を保ちつつフィードバックしたい<br />Haskell 対応した修正について本体に取り込んでもらえるように設定ファイルに分離できればいいな、と。</li>
+</ul>
+
+          <p>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="algas" data-lang="ja">ツイート</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </p>
+        </div>
+        <div class="col-md-3">
+          <h3>ブクログ</h3>
+          <script type="text/javascript" src="http://widget.booklog.jp/blogparts/js/booklog_minishelf.js?default" id="booklog_minishelf"></script>
+          <script type="text/javascript" src="http://api.booklog.jp/json/algas?category=0&amp;count=15&amp;callback=booklog_minishelf"></script>
+          <h3>twitter</h3>
+          <a class="twitter-timeline" href="https://twitter.com/algas" data-widget-id="265006276424122368">@algas からのツイート</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>Powered by <a href="http://jaspervdj.be/hakyll/">Hakyll</a>
+      and <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
+      .</p>
+      <p>© Masahiro Yamauchi</p>
+    </footer>
+    <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  </body>
+</html>
